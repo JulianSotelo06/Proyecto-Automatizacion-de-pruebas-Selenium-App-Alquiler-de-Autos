@@ -1,3 +1,7 @@
+import time
+
+from webdriver_manager.core import driver
+
 import data
 from selenium import webdriver
 from selenium.webdriver import Keys
@@ -37,6 +41,20 @@ def retrieve_phone_code(driver) -> str:
 class UrbanRoutesPage:
     from_field = (By.ID, 'from')
     to_field = (By.ID, 'to')
+    pedir_un_taxi_button = (By.XPATH, "//button[text() = 'Pedir un taxi']")
+    comfort_button = (By.XPATH, "//div[contains(@class, 'tcard') and .//div[text()='Comfort']]")
+    phone_number_button = (By.CLASS_NAME, 'np-text')
+    phone_number_text = (By.CLASS_NAME, 'label')
+    phone_submit_button = (By.CLASS_NAME, "button full")
+    phone_code = (By.ID, "code")
+    metodo_pago_button = (By.CLASS_NAME, "pp-text")
+    tarjeta_button = (By.CLASS_NAME, "pp-title")
+    card_number_text = (By.CLASS_NAME, "card-input")
+    card_code_text = (By.ID, "code")
+    agregar_card_button = (By.CLASS_NAME, "pp-buttons")
+    driver_message = (By.CLASS_NAME, "input-container")
+    blanket_scarves_button = (By.CLASS_NAME, "switch-input")
+    ice_cream_button = (By.CLASS_NAME, "counter-plus")
 
     def __init__(self, driver):
         self.driver = driver
@@ -54,7 +72,6 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.to_field).get_property('value')
 
 
-
 class TestUrbanRoutes:
 
     driver = None
@@ -67,6 +84,7 @@ class TestUrbanRoutes:
         capabilities["goog:loggingPrefs"] = {'performance': 'ALL'}
         cls.driver = webdriver.Chrome(desired_capabilities=capabilities)
 
+#Prueba 1. Configurar direcciones de partida y llegada
     def test_set_route(self):
         self.driver.get(data.urban_routes_url)
         routes_page = UrbanRoutesPage(self.driver)
@@ -76,6 +94,38 @@ class TestUrbanRoutes:
         assert routes_page.get_from() == address_from
         assert routes_page.get_to() == address_to
 
+#Prueba 2. Elegir modo comfort
+    def click_pedir_un_taxi_button(self):
+        self.driver.find_element(*self.pedir_un_taxi_button).click()
+        self.driver.find_element(*self.comfort_button).click()
+
+#Prueba 3. Agregar número de teléfono
+    def click_phone_number_button(self):
+        self.driver.find_element(*self.phone_number_button).click()
+        self.driver.find_element(*self.phone_number_text).send_keys(data.phone_number)
+        self.driver.find_element(*self.phone_submit_button).click()
+        self.driver.find_element(*self.phone_code).send_keys(retrieve_phone_code(driver))
+        self.driver.find_element(*self.phone_submit_button).click()
+
+#Prueba 4. Agregar tarjeta de crédito
+    def agregar_tarjeta(self):
+        self.driver.get(*self.metodo_pago_button).click()
+        self.driver.get(*self.tarjeta_button).click()
+        self.driver.get(*self.card_number_text).send_keys(data.card_number)
+        self.driver.get(*self.card_code_text).send_keys(data.card_code)
+        self.drive.get(*self.agregar_card_button).click()
+
+#Prueba 5. Mensaje para el conductor
+    def driver_message_input(self):
+        self.driver.get(*self.driver_message).send_keys(data.message_for_driver)
+
+#Prueba 6. Pedir una manta y pañuelos
+    def set_blanket_scarves(self):
+        self.driver.get(*self.blanket_scarves_button).click()
+
+#Prueba 7. Pedir 2 helados
+    def set_ice_cream(self):
+        self.driver.get(*self.ice_cream_button).click()
 
     @classmethod
     def teardown_class(cls):
