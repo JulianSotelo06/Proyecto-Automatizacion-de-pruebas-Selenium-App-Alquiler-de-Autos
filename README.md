@@ -19,11 +19,14 @@
 5. card_number, card_code: datos de la tarjeta predeterminados.
 6. message_for_driver: mensaje para el conductor.
 
-🟢 "_main.py_"; en este archivo se almacenan:
+🟢 "_helpers.py_"; en este archivo se almacena la función que recibe el código de confirmación al ingresar un número de teléfono.
 
-1. Localizadores.
-2. Métodos.
-3. Pruebas de funcionalidad para pedir un taxi.
+🟡 "_locators.py_"; en este archivo se almacenan todos los localizadores de botones y cajas de texto que se utilizan en cada función.
+
+🔴 "_main.py_"; en este archivo se almacenan:
+
+1. Métodos que se utilizaran para cada función.
+3. La prueba de funcionalidad para pedir un taxi en la tarifa Comfort.
 
 # 📝 Ejecución de pruebas:
 
@@ -36,7 +39,13 @@ Las pruebas de funcionalidad para el proceso de pedir un taxi se desarrollan en 
 5. Escribir un mensaje para el conductor.
 6. Pedir una manta y pañuelos.
 7. Pedir 2 helados.
+8. Confirmar el pedido del taxi.
 
+El resultado final al confirmar el pedido del taxi será una ventana donde inicia un temporizador de 30 segundos, obteniendo al final los datos del conductor y el carro pedidos.
+
+En el siguiente video se puede ver un demo de las pruebas ejecutadas en Urban Routes:
+
+[![Ver video](https://img.icons8.com/ios-filled/100/000000/play-button-circled.png)](https://drive.google.com/file/d/1AFXqvXJTvih6xzhRmygF5S3dvFVcWmTq/view?usp=drive_link)
 
 
 
