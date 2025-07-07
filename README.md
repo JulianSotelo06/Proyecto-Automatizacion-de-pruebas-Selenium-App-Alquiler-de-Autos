@@ -21,12 +21,11 @@
 
 🟢 "_helpers.py_"; en este archivo se almacena la función que recibe el código de confirmación al ingresar un número de teléfono.
 
-🟡 "_locators.py_"; en este archivo se almacenan todos los localizadores de botones y cajas de texto que se utilizan en cada función.
+🟡 "_UrbanRoutesPage.py_"; en este archivo se almacenan todos los localizadores de botones y cajas de texto, junto con los métodos para la interacción con la página.
 
 🔴 "_main.py_"; en este archivo se almacenan:
 
-1. Métodos que se utilizaran para cada función.
-3. La prueba de funcionalidad para pedir un taxi en la tarifa Comfort.
+1. El flujo de las pruebas de funcionalidad para pedir un taxi en la tarifa Comfort.
 
 # 📝 Ejecución de pruebas:
 
@@ -41,7 +40,7 @@ Las pruebas de funcionalidad para el proceso de pedir un taxi se desarrollan en 
 7. Pedir 2 helados.
 8. Confirmar el pedido del taxi.
 
-El resultado final al confirmar el pedido del taxi será una ventana donde inicia un temporizador de 30 segundos, obteniendo al final los datos del conductor y el carro pedidos.
+El resultado final al confirmar el pedido del taxi será una ventana donde inicia un temporizador, obteniendo al final los datos del conductor y el carro pedidos.
 
 En el siguiente video se puede ver un demo de las pruebas ejecutadas en Urban Routes:
 
